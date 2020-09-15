@@ -2,39 +2,34 @@ import java.util.Arrays;
 interface StackExample {
     void push(int n);
     int pop();
-}
+
 class StackExampleImpl implements StackExample{
-    private int size=0;
-    private Object elements[];
-    @Override
-    public void push(int n) {
-        if (size == elements.length) {
-            capacity();
-        }
-        elements[size++] = n;
+    int start, end, total, range,array[];
+
+    private void capacity(int range) {
+        this.range=range;
+        start=this.total=0;
+        end=range-1;
+        array=new int[this.range];
     }
-    @Override
+    public void push(int n){
+        this.end=(this.end +1) % this.range;
+        this.array[this.end]=n;
+        this.total=this.total +1;
+    }
+
     public int pop() {
-        int n = (int) elements[--size];
-        elements[size] = null;
+        int n=this.array[this.start];
+        this.start=(this.start +1)%this.range;
+        this.total=this.total-1;
         return n;
     }
-    private void capacity() {
-        int newSize = elements.length * 2;
-        elements = Arrays.copyOf(elements, newSize);
+
+    int start(){
+        return this.array[this.start];
     }
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append('[');
-        for(int i = 0; i < size ;i++) {
-            sb.append(elements[i].toString());
-            if(i < size-1){
-                sb.append(",");
-            }
-        }
-        sb.append(']');
-        return sb.toString();
+    int end(){
+        return this.array[this.end];
     }
     public static void main(String[] args)
     {
@@ -49,4 +44,4 @@ class StackExampleImpl implements StackExample{
         System.out.println( stack.pop() );
         System.out.println( stack );
     }
-}
+}}
