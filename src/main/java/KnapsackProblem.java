@@ -6,5 +6,40 @@
  * such that sum of the weights of this subset is smaller than or equal to W. You cannot break
  * an item, either pick the complete item or don’t pick it (0-1 property).
  */
-public class KnapsackProblem {
+class KnapsackProblem {
+static int maxValue(int a , int b){
+    return(a>b)?a:b;
 }
+static void printValue(int W , int weight[], int value[],int n){
+    int i,j;
+    int K[][] = new int [n+1][W+1];
+
+for(i=0;i<=n;i++){
+    for(j=0;j<=W;j++){
+        if(i==0||j==0)
+                K[i][j]=0;
+        else if (weight[i-1]<=j)
+            K[i][j]=Math.max(value[i-1]+K[i-1][j-weight[i-1]],K[i-1][j]);
+        else K[i][j]=K[i-1][j];
+    }
+    }
+int result=K[n][W];
+System.out.println(result);
+j=W;
+for(i=n;i>0&& result>0;i--){
+if (result==K[i-1][j])
+continue;
+else
+System.out.println(weight[i-1]+" ");
+result=result-value[i-1];
+j=j-weight[i-1];
+}
+}
+
+public static void main (String args[]){
+    int value[]={20,30,40};
+    int weight[]={1,2,3};
+    int W=25;
+    int n =value.length;
+    printValue(W,weight,value,n);
+}}
