@@ -38,7 +38,7 @@ class StackExampleImpl implements StackExample{
     }
     public static void main(String[] args)
     {
-        StackExampleImpl stack = new StackExampleImpl();
+        StackExample stack = new StackExampleImpl();
         stack.push(1);
         stack.push(2);
         stack.push(3);
